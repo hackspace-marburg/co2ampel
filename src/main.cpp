@@ -1,16 +1,16 @@
-#include <Arduino.h>
 #include "sensor.hpp"
+#include "sink.hpp"
 
 Sensor* sensor;
+Sink* sink;
 
 void setup() {
-  Serial.begin(115200);
-
   sensor = new(DummySensor);
-  Serial.println(sensor->name);
+  sink = new(SerialSink);
 }
 
 void loop() {
-  Serial.println(sensor->read());
+  sink->write(sensor->name, sensor->read());
+
   delay(500);
 }

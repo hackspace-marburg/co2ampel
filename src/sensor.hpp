@@ -2,6 +2,8 @@
 
 #include <Arduino.h>
 
+using PPM = unsigned int;
+
 class Sensor {
   protected:
     explicit Sensor(const String name) : name(name) {}
@@ -10,17 +12,17 @@ class Sensor {
   public:
     const String name;
 
-    virtual unsigned int read() = 0;
+    virtual PPM read() = 0;
 };
 
 class DummySensor : public Sensor {
   private:
-    unsigned int ppm = 600;
+    PPM ppm = 550;
 
   public:
     DummySensor() : Sensor(F("dummy")) {};
 
-    virtual unsigned int read() override {
+    PPM read() override {
       return ppm >= 1800 ? ppm = 600 : ppm += 50;
     }
 };
