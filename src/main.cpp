@@ -1,16 +1,24 @@
+#include <vector>
 #include "sensor.hpp"
 #include "sink.hpp"
 
 Sensor* sensor;
-Sink* sink;
+std::vector<Sink*> sinks;
 
 void setup() {
-  sensor = new(DummySensor);
-  sink = new(SerialSink);
+  sensor = new DummySensor;
+
+  sinks.push_back(new SerialSink(115200));
+  sinks.push_back(new LEDSink(2, 1000));
 }
 
 void loop() {
-  sink->write(sensor->name, sensor->read());
+  const String sensorName = sensor->name;
+  const PPM ppm = sensor->read();
+
+  for (Sink* sink : sinks) {
+    sink->write(sensorName, ppm);
+  }
 
   delay(500);
 }

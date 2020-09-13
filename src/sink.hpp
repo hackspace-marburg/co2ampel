@@ -12,8 +12,8 @@ class Sink {
 
 class SerialSink : public Sink {
   public:
-    SerialSink() {
-      Serial.begin(115200);
+    SerialSink(const int baud) {
+      Serial.begin(baud);
     }
 
     ~SerialSink() {
@@ -22,5 +22,20 @@ class SerialSink : public Sink {
 
     void write(const String sensorName, const PPM ppm) override {
       Serial.println(sensorName + "," + ppm);
+    }
+};
+
+class LEDSink : public Sink {
+  private:
+    int pin;
+    PPM threshold;
+
+  public:
+    LEDSink(const int pin, const PPM threshold) : pin(pin), threshold(threshold) {
+      pinMode(pin, OUTPUT);
+    }
+
+    void write(const String, const PPM ppm) override {
+      digitalWrite(pin, ppm >= threshold);
     }
 };
