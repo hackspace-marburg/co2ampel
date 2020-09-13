@@ -1,4 +1,5 @@
 #include <vector>
+#include "configuration.hpp"
 #include "sensor.hpp"
 #include "sink.hpp"
 
@@ -8,8 +9,16 @@ std::vector<Sink*> sinks;
 void setup() {
   sensor = new DummySensor;
 
-  sinks.push_back(new SerialSink(115200));
-  sinks.push_back(new LEDSink(2, 1000));
+#ifdef SINK_SERIAL
+  sinks.push_back(new SerialSink(SERIAL_BAUD));
+#endif // SINK_SERIAL
+#ifdef SINK_LED
+  sinks.push_back(new LEDSink(LED_PIN, LED_THRESHOLD));
+#endif // SINK_LED
+#ifdef SINK_INFLUX
+  sinks.push_back(new InfluxSink(
+        INFLUX_DEV_NAME, INFLUX_WIFI_SSID, INFLUX_WIFI_PSK, INFLUX_WIFI_URL));
+#endif // SINK_INFLUX
 }
 
 void loop() {

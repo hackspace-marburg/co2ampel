@@ -1,0 +1,19 @@
+#pragma once
+
+// SerialSink
+#define SINK_SERIAL
+#define SERIAL_BAUD 115200
+
+
+// LEDSink
+#define SINK_LED
+#define LED_PIN       2
+#define LED_THRESHOLD 1000
+
+
+// InfluxSink
+#define SINK_INFLUX
+#define INFLUX_DEV_NAME  "testymctestface"
+#define INFLUX_WIFI_SSID "marburg.freifunk.net"
+#define INFLUX_WIFI_PSK  nullptr
+#define INFLUX_WIFI_URL  "http://example.com:8086/write?db=co2"
