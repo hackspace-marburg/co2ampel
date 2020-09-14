@@ -7,7 +7,7 @@ Sensor* sensor;
 std::vector<Sink*> sinks;
 
 void setup() {
-  sensor = new DummySensor;
+  sensor = new BME680Sensor;
 
 #ifdef SINK_SERIAL
   sinks.push_back(new SerialSink(SERIAL_BAUD));
@@ -29,5 +29,5 @@ void loop() {
     sink->write(sensorName, ppm);
   }
 
-  delay(500);
+  delay(3000);
 }
