@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2020 Hackspace Marburg
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 #include <vector>
 #include "configuration.hpp"
 #include "sensor.hpp"

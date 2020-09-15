@@ -1,0 +1,12 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: co2ampel
+Upstream-Contact: Hackspace Marburg <mail@hsmr.cc>
+Source: https://github.com/hackspace-marburg/co2ampel
+
+Files: .github/* .gitignore
+Copyright: Hackspace Marburg
+License: GPL-3.0-or-later
+
+Files: shell.nix contrib/nix/*
+Copyright: Hackspace Marburg
+License: GPL-3.0-or-later
