@@ -1,0 +1,32 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  platformio:
+    name: Compile PlatformIO based Project
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up checkout, v2.3.2
+      uses: actions/checkout@2036a08e25fa78bbd946711a407b529a0a1204bf
+
+    - name: Set up Python, v2.1.2
+      uses: actions/setup-python@24156c231c5e9d581bde27d0cdbb72715060ea51
+      with:
+        python-version: "3.x"
+
+    - name: Install PlatformIO
+      run: |
+        python -m pip install --upgrade pip
+        pip install platformio
+
+    - name: Generate dummy configuration
+      run: cp src/configuration.hpp.example src/configuration.hpp
+
+    - name: Build PlatformIO project
+      run: platformio run
+
+    - name: Check PlatformIO project
+      run: platformio check --skip-packages
