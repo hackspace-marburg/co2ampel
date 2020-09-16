@@ -11,7 +11,7 @@ Sensor* sensor;
 std::vector<Sink*> sinks;
 
 void setup() {
-  sensor = new BME680Sensor;
+  sensor = new CCS811Sensor;
 
 #ifdef SINK_SERIAL
   sinks.push_back(new SerialSink(SERIAL_BAUD));
@@ -29,8 +29,10 @@ void loop() {
   const String sensorName = sensor->name;
   const PPM ppm = sensor->read();
 
-  for (Sink* sink : sinks) {
-    sink->write(sensorName, ppm);
+  if (ppm != 0) {  // TODO: use propper error handling
+    for (Sink* sink : sinks) {
+      sink->write(sensorName, ppm);
+    }
   }
 
   delay(3000);

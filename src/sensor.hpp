@@ -6,6 +6,8 @@
 
 #include <Adafruit_BME680.h>
 #include <Arduino.h>
+#include <Wire.h>
+#include <ccs811.h>
 
 using PPM = unsigned int;
 
@@ -55,5 +57,33 @@ class BME680Sensor : public Sensor {
       // https://github.com/adafruit/Adafruit_BME680/issues/37
       // http://www.dbu.de/media/12030902585415b2.pdf
       return bme.gas_resistance / 1000;
+    }
+};
+
+class CCS811Sensor : public Sensor {
+  private:
+    CCS811 ccs811;
+
+  public:
+    CCS811Sensor() : Sensor(F("ccs811")) {
+      Wire.begin();
+
+      for (int i = 0; !ccs811.begin() && i < 100; i++) {
+        delay(100);
+      }
+      for (int i = 0; !ccs811.start(CCS811_MODE_1SEC) && i < 100; i++) {
+        delay(100);
+      }
+    }
+
+    PPM read() override {
+      uint16_t eco2, errstat;
+      ccs811.read(&eco2, nullptr, &errstat, nullptr);
+
+      if (errstat != CCS811_ERRSTAT_OK) {
+        return 0;
+      }
+
+      return eco2;
     }
 };
