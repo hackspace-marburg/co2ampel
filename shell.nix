@@ -3,6 +3,7 @@
 pkgs.mkShell {
   buildInputs = with pkgs; [
     arduino-cli
+    fritzing
     platformio
     reuse
   ];

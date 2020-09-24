@@ -6,4 +6,6 @@ let
     url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
   });
   nixpkgs = mkNixpkgs (import ./nixpkgs.nix);
-in nixpkgs { inherit config overlays; }
+
+  overlaysAll = [(import ./overlays)] ++ overlays;
+in nixpkgs { inherit config; overlays=overlaysAll; }
