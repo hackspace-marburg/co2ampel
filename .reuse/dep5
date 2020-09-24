@@ -3,10 +3,14 @@ Upstream-Name: co2ampel
 Upstream-Contact: Hackspace Marburg <mail@hsmr.cc>
 Source: https://github.com/hackspace-marburg/co2ampel
 
-Files: .github/* .gitignore
+Files: README.md .gitignore .github/*
 Copyright: Hackspace Marburg
 License: GPL-3.0-or-later
 
 Files: shell.nix contrib/nix/*
+Copyright: Hackspace Marburg
+License: GPL-3.0-or-later
+
+Files: contrib/fritzing/*
 Copyright: Hackspace Marburg
 License: GPL-3.0-or-later
