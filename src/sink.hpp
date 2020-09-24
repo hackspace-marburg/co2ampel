@@ -33,8 +33,8 @@ class SerialSink : public Sink {
 
 class LEDSink : public Sink {
   private:
-    int pin;
-    PPM threshold;
+    const int pin;
+    const PPM threshold;
 
   public:
     LEDSink(const int pin, const PPM threshold) : pin(pin), threshold(threshold) {
@@ -48,8 +48,8 @@ class LEDSink : public Sink {
 
 class RGBLEDSink : public Sink {
   private:
-    int pin_r, pin_g, pin_b;
-    PPM threshold_warn, threshold_critical;
+    const int pin_r, pin_g, pin_b;
+    const PPM threshold_warn, threshold_critical;
 
     inline void rgb(const bool r, const bool g, const bool b) {
       digitalWrite(pin_r, r);

@@ -18,12 +18,12 @@ void setup() {
 #endif // SINK_SERIAL
 
 #ifdef SINK_LED
-  sinks.push_back(new LEDSink(LED_PIN, LED_THRESHOLD));
+  sinks.push_back(new LEDSink(LED_PIN, THRESHOLD_PPM_CRITICAL));
 #endif // SINK_LED
 
 #ifdef SINK_RGB_LED
   sinks.push_back(new RGBLEDSink(RGB_PIN_R, RGB_PIN_G, RGB_PIN_B,
-        RGB_THRESHOLD_WARN, RGB_THRESHOLD_CRITICAL));
+        THRESHOLD_PPM_WARN, THRESHOLD_PPM_CRITICAL));
 #endif //SINK_RGB_LED
 
 #ifdef SINK_INFLUX
@@ -42,5 +42,5 @@ void loop() {
     }
   }
 
-  delay(3000);
+  delay(CYCLE_DELAY_MS);
 }

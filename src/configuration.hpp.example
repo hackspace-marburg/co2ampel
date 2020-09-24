@@ -4,15 +4,19 @@
 
 #pragma once
 
+// Common
+#define THRESHOLD_PPM_WARN 1000
+#define THRESHOLD_PPM_CRITICAL 1400
+#define CYCLE_DELAY_MS 5000
+
 // SerialSink
 #define SINK_SERIAL
 #define SERIAL_BAUD 115200
 
 
 // LEDSink
-#define SINK_LED
-#define LED_PIN       2
-#define LED_THRESHOLD 1000
+//#define SINK_LED
+#define LED_PIN 2
 
 
 // RGBLEDSink
@@ -20,8 +24,6 @@
 #define RGB_PIN_R 15
 #define RGB_PIN_G 2
 #define RGB_PIN_B 4
-#define RGB_THRESHOLD_WARN 1000
-#define RGB_THRESHOLD_CRITICAL 1400
 
 
 // InfluxSink
