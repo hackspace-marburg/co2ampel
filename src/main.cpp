@@ -16,9 +16,16 @@ void setup() {
 #ifdef SINK_SERIAL
   sinks.push_back(new SerialSink(SERIAL_BAUD));
 #endif // SINK_SERIAL
+
 #ifdef SINK_LED
   sinks.push_back(new LEDSink(LED_PIN, LED_THRESHOLD));
 #endif // SINK_LED
+
+#ifdef SINK_RGB_LED
+  sinks.push_back(new RGBLEDSink(RGB_PIN_R, RGB_PIN_G, RGB_PIN_B,
+        RGB_THRESHOLD_WARN, RGB_THRESHOLD_CRITICAL));
+#endif //SINK_RGB_LED
+
 #ifdef SINK_INFLUX
   sinks.push_back(new InfluxSink(
         INFLUX_DEV_NAME, INFLUX_WIFI_SSID, INFLUX_WIFI_PSK, INFLUX_WIFI_URL));
